@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<script
+			src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+			integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
+			crossorigin="anonymous"
+		></script>
+
+		<script type="module" src="/js/index/main.js"></script>
+		<script type="module" src="/js/index/tictactoe.js"></script>
+		<script defer src="/js/hover-effects.js"></script>
+
+		<link rel="stylesheet" href="/css/styles.index.css" />
+		<link rel="stylesheet" href="/css/global.css" />
+
+		<title>TicTacToe</title>
+	</head>
+	<body>
+		<aside id="sidebar" class="open">
+			<section class="sidebar-content open-content">
+				<header class="sidebar-section">
+					<span class="big-text"><%= username %></span>
+				</header>
+				<ul class="link-list">
+					<li class="section-selector active" data-section-index="0">Dashboard</li>
+					<li class="section-selector" data-section-index="1">Play</li>
+				</ul>
+				<footer class="sidebar-section app-description">
+					<p>
+						Disclaimer: This web application is not meant to provide means of entertainment, but rather, to test my programming abilities, sorry if you expected fun
+						gameplay :(
+					</p>
+				</footer>
+			</section>
+			<ul class="sidebar-content closed-content" style="display: none"></ul>
+		</aside>
+		<main id="main-content">
+			<section class="dashboard-container content-container">
+				<header>
+					<h1>Hello, <%= username %></h1>
+				</header>
+				<section></section>
+			</section>
+			<section class="matchmaker-container content-container">
+				<header>
+					<h1>Play</h1>
+				</header>
+				<section>
+					<form id="play-against">
+						<input name="against" type="text" min="4" required />
+						<button type="submit">Play</button>
+					</form>
+				</section>
+			</section>
+		</main>
+
+		<script>
+			const username = "<%= username %>";
+			const passwordHash = "<%= user.passwordHash %>";
+			const playAgainstForm = document.querySelector("#play-against");
+
+			const socket = io({
+				auth: {
+					token: `${username}\n${passwordHash}`,
+				},
+			});
+
+			function playAgainst(against) {
+				if (socket && typeof against === "string" && against.length > 3)
+					socket.emit("create game", against, response => {
+						console.log(response);
+					});
+			}
+
+			if (playAgainstForm instanceof HTMLFormElement) {
+				playAgainstForm.addEventListener("submit", e => {
+					e.preventDefault();
+
+					const data = new FormData(playAgainstForm);
+
+					playAgainst(data.get("against"));
+				});
+			}
+
+			socket.on("connect_error", err => {
+				console.error(err); // prints the message associated with the error
+			});
+
+			socket.on("matchmaking request", (against, callback) => {
+				console.log(against);
+				callback({ ok: true });
+			});
+
+			socket.on("game created", () => {
+				console.log("WE CREATED A MATCH LES GOOOOOOOOO");
+			});
+		</script>
+	</body>
+</html>

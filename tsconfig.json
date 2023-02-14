@@ -1,0 +1,12 @@
+{
+	"include": ["src/**/*"],
+	"compilerOptions": {
+		"moduleResolution": "node",
+		"strict": true,
+		"outDir": "js",
+		"lib": ["es2021", "DOM"],
+		"watch": true,
+		"target": "ES6",
+		"allowJs": true
+	}
+}

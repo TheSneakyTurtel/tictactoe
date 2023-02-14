@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<script defer src="/js/login/main.js"></script>
+		<script defer src="/js/hover-effects.js"></script>
+
+		<link rel="stylesheet" href="/css/global.css" />
+		<link rel="stylesheet" href="/css/styles.login.css" />
+		<link rel="stylesheet" href="/css/hover-effect.css" />
+
+		<title>Log In / Sign up</title>
+	</head>
+	<body>
+		<main id="login">
+			<h1>Welcome to Tic-Tac-Toe</h1>
+			<p>Please log in or sign up to get access to this wonderful web app!</p>
+			<form id="login-form">
+				<div class="input-wrapper hover-effect">
+					<input minlength="4" autocapitalize="off" autocomplete="off" placeholder="Name" name="username" type="text" required />
+				</div>
+				<div class="input-wrapper hover-effect">
+					<input minlength="4" autocapitalize="off" autocomplete="off" placeholder="Pass" name="password" type="password" required />
+				</div>
+				<section class="calls-to-action">
+					<button id="login-submit" class="hover-effect" type="submit">Log in</button>
+					<button id="signup-submit" class="hover-effect" type="submit">Sign up</button>
+				</section>
+			</form>
+			<section class="error-message"><%= error ? error : "" %></section>
+		</main>
+	</body>
+</html>

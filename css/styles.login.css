@@ -1,0 +1,134 @@
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-image: radial-gradient(circle, #ffffff0a 1px, #fff0 1px);
+	background-color: #101010;
+	background-size: 1rem 1rem;
+	isolation: isolate;
+	padding: 2em;
+}
+
+body::before,
+body::after {
+	content: "";
+	opacity: 0.1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+
+body::before {
+	background-image: radial-gradient(circle at top left, rgb(183, 25, 25), #00000000 100%), radial-gradient(circle at top right, rgb(38, 25, 183), #00000000 100%);
+}
+
+body::after {
+	background-image: radial-gradient(circle at top right, rgb(38, 25, 183), #00000000 100%), radial-gradient(circle at top left, rgb(183, 25, 25), #00000000 100%);
+}
+
+#login {
+	padding: 2em;
+	display: flex;
+	gap: 2em;
+	flex-direction: column;
+	background-color: #202021;
+	border: 1px solid #ffffff15;
+	border-radius: 2px;
+	box-shadow: 0 2px 12px #00000020;
+	width: 100%;
+	max-width: 680px;
+	overflow-y: auto;
+	max-height: 100%;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 2em;
+	align-items: flex-start;
+}
+
+form input,
+form button {
+	padding: 0.75em 1.5em;
+	font-family: inherit;
+	background-color: #242525;
+	border: 1px solid #ffffff15;
+	border-radius: 2px;
+	font-size: 1em;
+	color: white;
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+	outline: none;
+	transition: background-color 0.1s, border-color 0.1s;
+	transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+form .input-wrapper {
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+}
+
+form .calls-to-action {
+	display: flex;
+	width: 100%;
+	gap: 2em;
+	justify-content: flex-start;
+}
+
+form button {
+	cursor: pointer;
+	color: #ffffffd0;
+	transition: color 0.1s, letter-spacing 0.1s;
+	transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+form input:focus,
+form button:focus {
+	background-color: #292a2b;
+	border-color: #ffffff40;
+	outline: none;
+}
+
+form input::placeholder {
+	transition: color 0.1s, letter-spacing 0.1s;
+	transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+form input:is(:hover, :focus)::placeholder {
+	color: #ffffff9b;
+	letter-spacing: 1px;
+}
+
+form button:is(:hover, :focus) {
+	color: #fff;
+	letter-spacing: 1px;
+}
+
+.error-message {
+	padding: 2em;
+	border: 1px solid #8f3b3e;
+	background-color: #8f3b3e3f;
+	border-radius: 2px;
+	color: white;
+	will-change: transform;
+}
+
+.error-message.flash {
+	animation: error-message-flash 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.error-message:empty {
+	display: none;
+}
+
+@keyframes error-message-flash {
+	from {
+		transform: scale(0.95);
+	}
+}

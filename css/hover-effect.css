@@ -1,0 +1,109 @@
+.hover-effect::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #ffffff10;
+	border-radius: inherit;
+	pointer-events: none;
+	transition: opacity 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    --effect-duration: 0.2s;
+}
+
+.hover-effect:not([data-exit-from], [data-enter-from])::after {
+	opacity: 0;
+}
+
+@media (hover: none) {
+	.hover-effect::after {
+		opacity: 0;
+	}
+}
+
+@media (hover: hover) {
+	.hover-effect[data-exit-from="left"]::after {
+		animation: exit-from-left var(--effect-duration) cubic-bezier(0.165, 0.84, 0.44, 1) 1 forwards;
+	}
+
+	.hover-effect[data-exit-from="right"]::after {
+		animation: exit-from-right var(--effect-duration) cubic-bezier(0.165, 0.84, 0.44, 1) 1 forwards;
+	}
+
+	.hover-effect[data-exit-from="top"]::after {
+		animation: exit-from-top var(--effect-duration) cubic-bezier(0.165, 0.84, 0.44, 1) 1 forwards;
+	}
+
+	.hover-effect[data-exit-from="bottom"]::after {
+		animation: exit-from-bottom var(--effect-duration) cubic-bezier(0.165, 0.84, 0.44, 1) 1 forwards;
+	}
+
+	.hover-effect[data-enter-from="bottom"]::after {
+		animation: enter-from-bottom var(--effect-duration) cubic-bezier(0.165, 0.84, 0.44, 1) 1 forwards;
+	}
+
+	.hover-effect[data-enter-from="left"]::after {
+		animation: enter-from-left var(--effect-duration) cubic-bezier(0.165, 0.84, 0.44, 1) 1 forwards;
+	}
+
+	.hover-effect[data-enter-from="right"]::after {
+		animation: enter-from-right var(--effect-duration) cubic-bezier(0.165, 0.84, 0.44, 1) 1 forwards;
+	}
+
+	.hover-effect[data-enter-from="top"]::after {
+		animation: enter-from-top var(--effect-duration) cubic-bezier(0.165, 0.84, 0.44, 1) 1 forwards;
+	}
+}
+
+@keyframes enter-from-top {
+	from {
+		transform: translateY(-100%);
+	}
+}
+
+@keyframes enter-from-left {
+	from {
+		transform: translateX(-100%);
+	}
+}
+
+@keyframes enter-from-right {
+	from {
+		transform: translateX(100%);
+	}
+}
+
+@keyframes enter-from-bottom {
+	from {
+		transform: translateY(100%);
+	}
+}
+
+@keyframes exit-from-top {
+	to {
+		transform: translateY(-100%);
+	}
+}
+
+@keyframes exit-from-left {
+	to {
+		transform: translateX(-100%);
+	}
+}
+
+@keyframes exit-from-right {
+	to {
+		transform: translateX(100%);
+	}
+}
+
+@keyframes exit-from-bottom {
+	to {
+		transform: translateY(100%);
+	}
+}
+
+.hover-effect:is(:hover, :focus)::after {
+	opacity: 1;
+}
